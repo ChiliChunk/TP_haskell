@@ -8,7 +8,7 @@ moins :: Int -> Int -> Int
 moins x 0 = x
 moins x y
     | y > 0 = moins (pred x) (pred y)
-    | otherwise = moins (pred x) (succ y)
+    | otherwise = moins (succ x) (succ y)
 
 abs' :: Int -> Int
 abs' 0 = 0
