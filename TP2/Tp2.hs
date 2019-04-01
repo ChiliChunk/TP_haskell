@@ -1,4 +1,4 @@
-
+  
 estPremier :: Int -> Bool
 estPremier x
   | x < 2 = error("CANNOT BE < 2")
@@ -69,3 +69,34 @@ conc :: [Int] -> [Int] -> [Int]
 conc [] l1 = l1
 conc l2 [] = l2
 conc (x:xs) l2 = x:conc xs l2
+
+tresse :: [a] -> [b] -> [c] -> [(a,b,c)]
+tresse [x] [y] [z] = [(x,y,z)]
+tresse (x:xs) (y:ys) (z:zs) = (x,y,z):tresse xs ys zs
+
+-- detresse :: [(a, b, c)] -> ([a], [b], [c])
+-- detresse l = ([x | (x, , _) <- l], [y | (, y, ) <- l], [z | (, _, z) <- l])
+
+inserer :: [Int] -> Int -> [Int]
+inserer [] w = []
+inserer (x:xs) w
+  | w < x = w:x:xs   
+  | otherwise = x:inserer xs w
+
+compter :: (Int->Bool) -> [Int] ->Int
+compter fn [] = 0
+compter fn (x:xs)
+  | fn x == True = succ(compter fn xs)
+  | otherwise = compter fn xs
+
+filtrer ::(Int -> Bool) -> [Int] -> [Int]
+filtrer fn [] = []
+filtrer fn (x:xs)
+  | fn x == True = x:filtrer fn xs
+  | otherwise = filtrer fn xs
+
+find ::(Int -> Bool) -> [Int] -> Int
+find fn [] = -1
+find fn (x:xs)
+  | fn x == True = x
+  | otherwise = find fn xs
